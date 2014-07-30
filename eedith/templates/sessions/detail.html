@@ -1,0 +1,9 @@
+<h1>{{ session.description }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+  <form action="{% url 'sessions:update_description' session.id %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="description" />
+    <input type="submit" value="update" />
+  </form>
