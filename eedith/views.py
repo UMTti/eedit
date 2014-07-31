@@ -4,6 +4,7 @@ from eedith.models import Session
 from django.template import RequestContext, loader
 from django.http import Http404
 from django.core.urlresolvers import reverse
+from django.utils import timezone
 
 # Create your views here.
 
@@ -23,5 +24,12 @@ def update_description(request, session_id):
     p.description = text
     p.save()
     return render(request, 'sessions/index.html', {
+        'sessions_list': Session.objects.all(),
+    })
+
+def create_session(request):
+	new = Session(description="Default description", pub_date=timezone.now())
+	new.save()
+	return render(request, 'sessions/index.html', {
         'sessions_list': Session.objects.all(),
     })

@@ -1,3 +1,8 @@
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+  google.load("jquery", "1.4");
+</script>
+
 <h1> Your latest working sessions </h1>
 {% if sessions_list %}
     <ul>
@@ -8,3 +13,12 @@
 {% else %}
     <p>No sessions exist :)</p>
 {% endif %}
+
+<form action="{% url 'sessions:create_session' %}" method="get">
+   <input type="submit" value="Create new session" />
+</form>
+
+
+<script>
+    
+</script>
