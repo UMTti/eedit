@@ -17,6 +17,9 @@
     <p>No sessions exist :)</p>
 {% endif %}
 
+
+The latest: <li><a href="{% url 'sessions:detail' latest.id %}">{{ latest.description }}</a></li>
+
 <form action="{% url 'sessions:create_session' %}" method="get">
    <input type="submit" value="Start session" class="btn btn-primary"/>
 </form>
