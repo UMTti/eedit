@@ -2,7 +2,10 @@
 <script type="text/javascript">
   google.load("jquery", "1.4");
 </script>
+<link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
 
+
+<li><a href="{% url 'sessions:detail' latest.id %}">{{ latest.description }}</a></li>
 <h1> Your latest working sessions </h1>
 {% if sessions_list %}
     <ul>
@@ -15,7 +18,7 @@
 {% endif %}
 
 <form action="{% url 'sessions:create_session' %}" method="get">
-   <input type="submit" value="Create new session" />
+   <input type="submit" value="Start session" class="btn btn-primary"/>
 </form>
 
 

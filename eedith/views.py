@@ -10,7 +10,8 @@ from django.utils import timezone
 
 def index(request):
     sessions_list = Session.objects.all()
-    context = {'sessions_list': sessions_list}
+    latest = Session.objects.all()[Session.objects.count()-1]
+    context = {'sessions_list': sessions_list, 'latest': latest}
     return render(request, 'sessions/index.html', context)
 
 
@@ -28,7 +29,7 @@ def update_description(request, session_id):
     })
 
 def create_session(request):
-	new = Session(description="Default description", pub_date=timezone.now())
+	new = Session(description="Default description", start_date=timezone.now(), end_date=timezone.now())
 	new.save()
 	return render(request, 'sessions/index.html', {
         'sessions_list': Session.objects.all(),
