@@ -22,26 +22,25 @@
 </head>
 
 Eedit - Note your workhours
-<img src="{% static "kisu.png" %}" alt="cat">
 
-<div style="position:absolute;top:45%;left:45%;">
+<div style="position:absolute;top:20%;left:40%;">
+	<img src="http://placekitten.com/g/340/300" alt="cat" style="margin-bottom:20px;">
   {% if latest.ended == False %}
-      <div style="border:1px solid black;padding:10px;margin-bottom:15px;width:200px;">ATM: <a href="{% url 'sessions:detail' latest.id %}">{{ latest.description }}</a></div>
+      <div style="border:1px solid black;padding:10px;margin-bottom:15px;width:320px;">ATM: <a href="{% url 'sessions:detail' latest.id %}">{{ latest.description }}</a></div>
 
       <form action="{% url 'sessions:end_session' latest.id %}" method="post" class="pure-form">
         {% csrf_token %}
-        <input type="submit" value="Stop" class="pure-button" style="width:220px;"/>
+        <input type="submit" value="Stop" class="pure-button" style="width:340px;color:white;background:rgb(20, 20, 20);"/>
       </form>
 
   {% else %}
-      <p>Start new session</p>
       <form action="{% url 'sessions:create_session' %}" method="get" class="pure-form">
-      	<input type="text" name="des" />
-        <input type="submit" value="Start" class="pure-button"/>
+      	<input type="text" name="des" placeholder="Write a description"/>
+        <input type="submit" value="Start" class="pure-button" style="color:white;background:rgb(20, 20, 20);"/>
       </form>
   {% endif %}
 
-  <button class="pure-button" style="margin-top:15px;width:220px;"> <a href="{% url 'sessions:all_sessions'%}">All sessions</a> </button>
+  <button class="pure-button" style="margin-top:15px;width:340px;"> <a href="{% url 'sessions:all_sessions'%}">All sessions</a> </button>
 
 </div>
 

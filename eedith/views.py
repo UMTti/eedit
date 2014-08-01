@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from eedith.models import Session
 from django.template import RequestContext, loader
@@ -32,10 +32,7 @@ def update_description(request, session_id):
     p.description = text
     p.save()
     latest = Session.objects.all()[Session.objects.count()-1]
-    return render(request, 'sessions/index.html', {
-        'sessions_list': Session.objects.all(),
-        'latest': latest,
-    })
+    return redirect('/eedith')
 
 def create_session(request):
 	new = Session(description="Default description", start_date=timezone.now(), end_date=timezone.now(), ended=False)
@@ -44,10 +41,11 @@ def create_session(request):
 	new.save()
 	latest = Session.objects.all()[Session.objects.count()-1]
 
-	return render(request, 'sessions/index.html', {
-        'sessions_list': Session.objects.all(),
-        'latest': latest,
-    })
+	return redirect('/eedith')
+	# return render(request, 'sessions/index.html', {
+    #    'sessions_list': Session.objects.all(),
+    #    'latest': latest,
+    # })
 
 def end_session(request, session_id):
 	session = get_object_or_404(Session, pk=session_id)
@@ -56,10 +54,7 @@ def end_session(request, session_id):
 	session.save()
 	latest = Session.objects.all()[Session.objects.count()-1]
 
-	return render(request, 'sessions/index.html', {
-        'sessions_list': Session.objects.all(),
-        'latest': latest,
-    })
+	return redirect('/eedith')
 
 def all_sessions(request): 
     sessions_list = Session.objects.all()
