@@ -21,7 +21,9 @@ def index(request):
 
 def detail(request, session_id):
     session = get_object_or_404(Session, pk=session_id)
-    return render(request, 'sessions/detail.html', {'session': session})
+    difference = session.end_date - session.start_date
+    d = divmod(difference.total_seconds(), 60)
+    return render(request, 'sessions/detail.html', {'session': session, 'd': d})
 
 def update_description(request, session_id):
     p = get_object_or_404(Session, pk=session_id)

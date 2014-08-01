@@ -5,6 +5,7 @@ Started: <h3>{{ session.start_date }}</h3>
 
 {% if session.ended == True %}
     Ended: <h3>{{ session.end_date }}</h3>
+    {{d}}
 {% endif %}
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
