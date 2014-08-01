@@ -10,7 +10,7 @@ Started: <h3>{{ session.start_date }}</h3>
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 Update description 
-  <form action="{% url 'sessions:update_description' session.id %}" method="post">
+  <form action="{% url 'sessions:update_description' session.id %}" method="post" class="pure-form">
     {% csrf_token %}
     <input type="text" name="description" />
     <input type="submit" value="update" />

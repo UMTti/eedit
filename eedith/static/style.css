@@ -1,0 +1,8 @@
+ @font-face {
+    font-family: 'fontti'; /*a name to be used later*/
+    src: url('OpticalFiber.ttf'); /*URL to font*/
+}
+
+.all {
+    font-family: 'fontti';
+}
