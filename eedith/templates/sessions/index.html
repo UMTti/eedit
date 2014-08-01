@@ -22,16 +22,15 @@
 </head>
 
 Eedit - Note your workhours
+<img src="{% static "kisu.png" %}" alt="cat">
 
-<div class="pure-g">
-
-<div class="pure-u-2-5">
+<div style="position:absolute;top:45%;left:45%;">
   {% if latest.ended == False %}
-      <div style="border:1px solid black;padding:5px;">Now: <a href="{% url 'sessions:detail' latest.id %}">{{ latest.description }}</a></div>
+      <div style="border:1px solid black;padding:10px;margin-bottom:15px;width:200px;">ATM: <a href="{% url 'sessions:detail' latest.id %}">{{ latest.description }}</a></div>
 
       <form action="{% url 'sessions:end_session' latest.id %}" method="post" class="pure-form">
         {% csrf_token %}
-        <input type="submit" value="Stop" class="pure-button"/>
+        <input type="submit" value="Stop" class="pure-button" style="width:220px;"/>
       </form>
 
   {% else %}
@@ -42,13 +41,10 @@ Eedit - Note your workhours
       </form>
   {% endif %}
 
-</div>
-
-<div class="pure-u-2-5">
-  <button class="pure-button" style="margin:5px;"> <a href="{% url 'sessions:all_sessions'%}">All sessions</a> </button>
-</div>
+  <button class="pure-button" style="margin-top:15px;width:220px;"> <a href="{% url 'sessions:all_sessions'%}">All sessions</a> </button>
 
 </div>
+
 
 <script>
     
