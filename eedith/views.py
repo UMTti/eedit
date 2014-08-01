@@ -36,6 +36,8 @@ def update_description(request, session_id):
 
 def create_session(request):
 	new = Session(description="Default description", start_date=timezone.now(), end_date=timezone.now(), ended=False)
+	text = request.GET['des']
+	new.description = text
 	new.save()
 	latest = Session.objects.all()[Session.objects.count()-1]
 
@@ -47,6 +49,7 @@ def create_session(request):
 def end_session(request, session_id):
 	session = get_object_or_404(Session, pk=session_id)
 	session.ended = True
+	session.end_date = timezone.now()
 	session.save()
 	latest = Session.objects.all()[Session.objects.count()-1]
 
@@ -55,4 +58,8 @@ def end_session(request, session_id):
         'latest': latest,
     })
 
+def all_sessions(request): 
+    sessions_list = Session.objects.all()
+    context = {'sessions_list': sessions_list}
+    return render(request, 'sessions/all_sessions.html', context)
 

@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'eedith',
+    'twitter_bootstrap',
 )
 
 MIDDLEWARE_CLASSES = (

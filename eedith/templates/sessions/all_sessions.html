@@ -1,0 +1,10 @@
+<h1> Your latest working sessions </h1>
+{% if sessions_list %}
+    <ul>
+    {% for session in sessions_list %}
+        <li style="padding:5px;border:1px;"><a href="{% url 'sessions:detail' session.id %}">{{ session.description }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No sessions exist :)</p>
+{% endif %}
