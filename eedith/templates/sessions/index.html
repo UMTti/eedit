@@ -5,7 +5,21 @@
 <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
 
 
-<li><a href="{% url 'sessions:detail' latest.id %}">{{ latest.description }}</a></li>
+{% if latest.ended == False %}
+    Now<li><a href="{% url 'sessions:detail' latest.id %}">{{ latest.description }}</a></li>
+
+    <form action="{% url 'sessions:end_session' latest.id %}" method="post">
+      {% csrf_token %}
+      <input type="submit" value="End current session" class="btn btn-primary"/>
+    </form>
+
+{% else %}
+    <p>You haven't a current session right now :) </p>
+{% endif %}
+
+
+
+
 <h1> Your latest working sessions </h1>
 {% if sessions_list %}
     <ul>
@@ -18,7 +32,6 @@
 {% endif %}
 
 
-The latest: <li><a href="{% url 'sessions:detail' latest.id %}">{{ latest.description }}</a></li>
 
 <form action="{% url 'sessions:create_session' %}" method="get">
    <input type="submit" value="Start session" class="btn btn-primary"/>

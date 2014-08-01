@@ -10,7 +10,11 @@ from django.utils import timezone
 
 def index(request):
     sessions_list = Session.objects.all()
-    latest = Session.objects.all()[Session.objects.count()-1]
+    try:
+        latest = Session.objects.all()[Session.objects.count()-1]
+    except AssertionError:
+        latest = Session(description="Default description", start_date=timezone.now(), end_date=timezone.now(), ended=False)
+        latest.save()
     context = {'sessions_list': sessions_list, 'latest': latest}
     return render(request, 'sessions/index.html', context)
 
@@ -24,13 +28,31 @@ def update_description(request, session_id):
     text = request.POST['description']
     p.description = text
     p.save()
+    latest = Session.objects.all()[Session.objects.count()-1]
     return render(request, 'sessions/index.html', {
         'sessions_list': Session.objects.all(),
+        'latest': latest,
     })
 
 def create_session(request):
-	new = Session(description="Default description", start_date=timezone.now(), end_date=timezone.now())
+	new = Session(description="Default description", start_date=timezone.now(), end_date=timezone.now(), ended=False)
 	new.save()
+	latest = Session.objects.all()[Session.objects.count()-1]
+
 	return render(request, 'sessions/index.html', {
         'sessions_list': Session.objects.all(),
+        'latest': latest,
     })
+
+def end_session(request, session_id):
+	session = get_object_or_404(Session, pk=session_id)
+	session.ended = True
+	session.save()
+	latest = Session.objects.all()[Session.objects.count()-1]
+
+	return render(request, 'sessions/index.html', {
+        'sessions_list': Session.objects.all(),
+        'latest': latest,
+    })
+
+
